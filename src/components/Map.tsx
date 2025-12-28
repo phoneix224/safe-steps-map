@@ -1,9 +1,8 @@
 import { useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, CircleMarker, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, CircleMarker, useMap, Polyline } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Coordinate } from '@/types/route';
-import RGBPath from './RGBPath';
 
 // Fix for default marker icons
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -21,11 +20,19 @@ interface MapProps {
   showBreadcrumbs?: boolean;
 }
 
+// Generate rainbow color based on progress
+const getRainbowColor = (progress: number): string => {
+  const hue = progress * 360;
+  return `hsl(${hue}, 100%, 55%)`;
+};
+
 const CurrentLocationMarker = ({ position }: { position: Coordinate }) => {
   const map = useMap();
   
   useEffect(() => {
-    map.setView([position.lat, position.lng], map.getZoom());
+    if (map && position) {
+      map.setView([position.lat, position.lng], map.getZoom());
+    }
   }, [position, map]);
 
   return (
@@ -39,7 +46,6 @@ const CurrentLocationMarker = ({ position }: { position: Coordinate }) => {
           fillOpacity: 0.2,
           stroke: false,
         }}
-        className="pulse-ring"
       />
       {/* Glow ring */}
       <CircleMarker
@@ -71,6 +77,8 @@ const RecenterButton = ({ position }: { position: [number, number] }) => {
   const controlRef = useRef<L.Control | null>(null);
 
   useEffect(() => {
+    if (!map) return;
+    
     if (controlRef.current) {
       controlRef.current.remove();
     }
@@ -119,60 +127,78 @@ const RecenterButton = ({ position }: { position: [number, number] }) => {
   return null;
 };
 
-const SavedPathLayer = ({ path }: { path: Coordinate[] }) => {
-  const map = useMap();
-  const layerRef = useRef<L.LayerGroup | null>(null);
-
-  useEffect(() => {
-    if (!map || path.length < 2) return;
-
-    if (!layerRef.current) {
-      layerRef.current = L.layerGroup().addTo(map);
-    }
-
-    const layer = layerRef.current;
-    layer.clearLayers();
-
-    const positions = path.map(c => [c.lat, c.lng] as [number, number]);
-
-    // Dashed path for saved routes
-    const polyline = L.polyline(positions, {
-      color: '#00e5ff',
-      weight: 4,
-      opacity: 0.7,
-      dashArray: '10, 10',
-    });
-
-    const glow = L.polyline(positions, {
-      color: '#00e5ff',
-      weight: 10,
-      opacity: 0.2,
-    });
-
-    layer.addLayer(glow);
-    layer.addLayer(polyline);
-
-    return () => {
-      if (layerRef.current) {
-        layerRef.current.clearLayers();
-      }
-    };
-  }, [map, path]);
-
-  useEffect(() => {
-    return () => {
-      if (layerRef.current) {
-        layerRef.current.clearLayers();
-        layerRef.current.remove();
-        layerRef.current = null;
-      }
-    };
-  }, []);
-
-  return null;
+// RGB Path segments rendered inline using Polyline
+const RGBPathSegments = ({ path }: { path: Coordinate[] }) => {
+  if (path.length < 2) return null;
+  
+  const segments = [];
+  for (let i = 0; i < path.length - 1; i++) {
+    const progress = i / (path.length - 1);
+    const color = getRainbowColor(progress);
+    const positions: [number, number][] = [
+      [path[i].lat, path[i].lng],
+      [path[i + 1].lat, path[i + 1].lng]
+    ];
+    
+    segments.push(
+      <Polyline
+        key={`glow-${i}`}
+        positions={positions}
+        pathOptions={{
+          color: color,
+          weight: 12,
+          opacity: 0.3,
+          lineCap: 'round',
+          lineJoin: 'round',
+        }}
+      />,
+      <Polyline
+        key={`line-${i}`}
+        positions={positions}
+        pathOptions={{
+          color: color,
+          weight: 5,
+          opacity: 0.9,
+          lineCap: 'round',
+          lineJoin: 'round',
+        }}
+      />
+    );
+  }
+  
+  return <>{segments}</>;
 };
 
-const Map = ({ center, currentPath, savedPath, currentPosition, showBreadcrumbs = true }: MapProps) => {
+// Saved path layer using Polyline
+const SavedPathSegments = ({ path }: { path: Coordinate[] }) => {
+  if (path.length < 2) return null;
+  
+  const positions: [number, number][] = path.map(c => [c.lat, c.lng]);
+  
+  return (
+    <>
+      <Polyline
+        positions={positions}
+        pathOptions={{
+          color: '#00e5ff',
+          weight: 10,
+          opacity: 0.2,
+        }}
+      />
+      <Polyline
+        positions={positions}
+        pathOptions={{
+          color: '#00e5ff',
+          weight: 4,
+          opacity: 0.7,
+          dashArray: '10, 10',
+        }}
+      />
+    </>
+  );
+};
+
+const Map = ({ center, currentPath, savedPath, currentPosition }: MapProps) => {
   const savedPathPositions = savedPath?.map(c => [c.lat, c.lng] as [number, number]) || [];
 
   return (
@@ -191,7 +217,7 @@ const Map = ({ center, currentPath, savedPath, currentPosition, showBreadcrumbs 
       {/* Saved route (if viewing) */}
       {savedPath && savedPath.length > 0 && (
         <>
-          <SavedPathLayer path={savedPath} />
+          <SavedPathSegments path={savedPath} />
           {/* Start marker */}
           <CircleMarker
             center={savedPathPositions[0]}
@@ -220,7 +246,7 @@ const Map = ({ center, currentPath, savedPath, currentPosition, showBreadcrumbs 
       {/* Current tracking path with RGB colors */}
       {currentPath.length > 1 && (
         <>
-          <RGBPath path={currentPath} animate={true} />
+          <RGBPathSegments path={currentPath} />
           
           {/* Start point */}
           <CircleMarker
