@@ -264,10 +264,6 @@
   background: hsl(220 15% 18%) !important;
 }
 
-.leaflet-tile-pane {
-  filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9);
-}
-
 .custom-marker {
   background: hsl(var(--accent));
   border: 3px solid hsl(var(--background));
