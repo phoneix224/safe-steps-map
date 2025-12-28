@@ -6,115 +6,117 @@
 
 @layer base {
   :root {
-    /* Earthy outdoor color palette */
-    --background: 45 20% 97%;
-    --foreground: 160 30% 15%;
+    /* Dark mode by default - Cyberpunk neon theme */
+    --background: 220 20% 8%;
+    --foreground: 210 40% 96%;
 
-    --card: 45 25% 95%;
-    --card-foreground: 160 30% 15%;
+    --card: 220 20% 12%;
+    --card-foreground: 210 40% 96%;
 
-    --popover: 45 25% 95%;
-    --popover-foreground: 160 30% 15%;
+    --popover: 220 20% 10%;
+    --popover-foreground: 210 40% 96%;
 
-    /* Deep forest green */
-    --primary: 160 45% 28%;
-    --primary-foreground: 45 20% 97%;
+    /* Neon cyan primary */
+    --primary: 175 85% 50%;
+    --primary-foreground: 220 20% 8%;
 
-    /* Warm sand */
-    --secondary: 35 35% 88%;
-    --secondary-foreground: 160 30% 20%;
+    /* Deep purple secondary */
+    --secondary: 280 60% 35%;
+    --secondary-foreground: 210 40% 96%;
 
-    /* Muted sage */
-    --muted: 140 15% 90%;
-    --muted-foreground: 160 15% 45%;
+    /* Muted dark */
+    --muted: 220 15% 18%;
+    --muted-foreground: 215 20% 55%;
 
-    /* Amber accent */
-    --accent: 35 90% 55%;
-    --accent-foreground: 160 30% 12%;
+    /* Neon pink accent */
+    --accent: 330 85% 60%;
+    --accent-foreground: 220 20% 8%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 140 20% 85%;
-    --input: 140 20% 85%;
-    --ring: 160 45% 28%;
+    --border: 220 15% 22%;
+    --input: 220 15% 22%;
+    --ring: 175 85% 50%;
 
     --radius: 0.75rem;
 
+    /* RGB Path colors */
+    --path-rgb-1: 330 85% 60%;
+    --path-rgb-2: 280 85% 60%;
+    --path-rgb-3: 175 85% 50%;
+    --path-rgb-4: 120 85% 50%;
+    --path-rgb-5: 45 85% 55%;
+
     /* Custom colors */
-    --trail: 35 90% 55%;
-    --marker: 160 45% 28%;
-    --path-glow: 35 100% 60%;
+    --trail: 330 85% 60%;
+    --marker: 175 85% 50%;
+    --path-glow: 330 100% 60%;
+    --neon-glow: 175 100% 50%;
     
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(160 45% 28%) 0%, hsl(170 40% 35%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(45 25% 98%) 0%, hsl(45 25% 94%) 100%);
-    --gradient-overlay: linear-gradient(180deg, transparent 0%, hsl(45 20% 97% / 0.9) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(175 85% 50%) 0%, hsl(280 60% 50%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(220 20% 14%) 0%, hsl(220 20% 10%) 100%);
+    --gradient-overlay: linear-gradient(180deg, transparent 0%, hsl(220 20% 8% / 0.95) 100%);
+    --gradient-rgb: linear-gradient(90deg, 
+      hsl(330 85% 60%) 0%, 
+      hsl(280 85% 60%) 25%, 
+      hsl(175 85% 50%) 50%, 
+      hsl(120 85% 50%) 75%, 
+      hsl(45 85% 55%) 100%);
 
     /* Shadows */
-    --shadow-soft: 0 4px 20px -4px hsl(160 30% 15% / 0.1);
-    --shadow-card: 0 8px 30px -8px hsl(160 30% 15% / 0.15);
-    --shadow-glow: 0 0 30px hsl(35 90% 55% / 0.3);
+    --shadow-soft: 0 4px 20px -4px hsl(0 0% 0% / 0.4);
+    --shadow-card: 0 8px 30px -8px hsl(0 0% 0% / 0.5);
+    --shadow-glow: 0 0 30px hsl(330 85% 60% / 0.4);
+    --shadow-neon: 0 0 40px hsl(175 85% 50% / 0.5);
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 220 20% 10%;
+    --sidebar-foreground: 210 40% 90%;
+    --sidebar-primary: 175 85% 50%;
+    --sidebar-primary-foreground: 220 20% 8%;
+    --sidebar-accent: 220 15% 18%;
+    --sidebar-accent-foreground: 210 40% 90%;
+    --sidebar-border: 220 15% 22%;
+    --sidebar-ring: 175 85% 50%;
+
+    /* Chart colors */
+    --chart-1: 175 85% 50%;
+    --chart-2: 330 85% 60%;
+    --chart-3: 280 60% 50%;
+    --chart-4: 120 85% 50%;
+    --chart-5: 45 85% 55%;
   }
 
-  .dark {
-    --background: 160 25% 8%;
-    --foreground: 45 20% 95%;
+  /* Light mode fallback */
+  .light {
+    --background: 210 40% 98%;
+    --foreground: 220 20% 15%;
 
-    --card: 160 25% 12%;
-    --card-foreground: 45 20% 95%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 15%;
 
-    --popover: 160 25% 12%;
-    --popover-foreground: 45 20% 95%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 15%;
 
-    --primary: 160 50% 45%;
-    --primary-foreground: 160 25% 8%;
+    --primary: 175 70% 40%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 160 20% 18%;
-    --secondary-foreground: 45 20% 90%;
+    --secondary: 280 50% 90%;
+    --secondary-foreground: 280 50% 30%;
 
-    --muted: 160 20% 18%;
-    --muted-foreground: 140 15% 60%;
+    --muted: 220 15% 92%;
+    --muted-foreground: 220 10% 45%;
 
-    --accent: 35 85% 50%;
-    --accent-foreground: 160 25% 8%;
+    --accent: 330 70% 55%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 62.8% 50%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 160 20% 20%;
-    --input: 160 20% 20%;
-    --ring: 160 50% 45%;
-
-    --trail: 35 85% 50%;
-    --marker: 160 50% 45%;
-    --path-glow: 35 100% 55%;
-
-    --gradient-hero: linear-gradient(135deg, hsl(160 50% 30%) 0%, hsl(170 45% 35%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(160 25% 14%) 0%, hsl(160 25% 10%) 100%);
-    --gradient-overlay: linear-gradient(180deg, transparent 0%, hsl(160 25% 8% / 0.9) 100%);
-
-    --shadow-soft: 0 4px 20px -4px hsl(0 0% 0% / 0.3);
-    --shadow-card: 0 8px 30px -8px hsl(0 0% 0% / 0.4);
-    --shadow-glow: 0 0 30px hsl(35 85% 50% / 0.4);
-
-    --sidebar-background: 160 25% 10%;
-    --sidebar-foreground: 45 20% 90%;
-    --sidebar-primary: 160 50% 45%;
-    --sidebar-primary-foreground: 160 25% 8%;
-    --sidebar-accent: 160 20% 15%;
-    --sidebar-accent-foreground: 45 20% 90%;
-    --sidebar-border: 160 20% 18%;
-    --sidebar-ring: 160 50% 45%;
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 175 70% 40%;
   }
 }
 
@@ -137,12 +139,12 @@
   .btn-tracking {
     @apply relative overflow-hidden transition-all duration-300;
     background: var(--gradient-hero);
-    box-shadow: var(--shadow-soft);
+    box-shadow: var(--shadow-neon);
   }
 
   .btn-tracking:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-card);
+    box-shadow: var(--shadow-card), var(--shadow-neon);
   }
 
   .btn-tracking:active {
@@ -158,6 +160,20 @@
     background: var(--gradient-card);
     box-shadow: var(--shadow-card);
     backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--border));
+  }
+
+  .neon-border {
+    border: 1px solid hsl(var(--primary) / 0.5);
+    box-shadow: 
+      inset 0 0 20px hsl(var(--primary) / 0.1),
+      0 0 20px hsl(var(--primary) / 0.2);
+  }
+
+  .neon-text {
+    text-shadow: 0 0 10px hsl(var(--primary) / 0.8),
+                 0 0 20px hsl(var(--primary) / 0.5),
+                 0 0 30px hsl(var(--primary) / 0.3);
   }
 
   .pulse-ring {
@@ -202,12 +218,33 @@
       box-shadow: 0 0 0 12px hsl(var(--accent) / 0);
     }
   }
+
+  @keyframes rgb-flow {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+  }
+
+  .rgb-animate {
+    animation: rgb-flow 4s linear infinite;
+  }
+
+  .nav-item {
+    @apply flex flex-col items-center gap-1 p-2 rounded-xl transition-all duration-200;
+  }
+
+  .nav-item.active {
+    @apply bg-primary/20 text-primary;
+  }
+
+  .nav-item:not(.active) {
+    @apply text-muted-foreground hover:text-foreground hover:bg-muted;
+  }
 }
 
-/* Leaflet custom styles */
+/* Leaflet custom styles - Dark mode */
 .leaflet-container {
   font-family: 'Inter', sans-serif !important;
-  background: hsl(var(--background)) !important;
+  background: hsl(220 20% 8%) !important;
 }
 
 .leaflet-control-zoom {
@@ -218,13 +255,17 @@
 }
 
 .leaflet-control-zoom a {
-  background: hsl(var(--card)) !important;
-  color: hsl(var(--foreground)) !important;
+  background: hsl(220 20% 12%) !important;
+  color: hsl(210 40% 96%) !important;
   border: none !important;
 }
 
 .leaflet-control-zoom a:hover {
-  background: hsl(var(--secondary)) !important;
+  background: hsl(220 15% 18%) !important;
+}
+
+.leaflet-tile-pane {
+  filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9);
 }
 
 .custom-marker {
@@ -236,8 +277,14 @@
 
 .start-marker {
   background: hsl(var(--primary));
+  box-shadow: var(--shadow-neon);
 }
 
 .end-marker {
   background: hsl(var(--destructive));
+}
+
+/* Safe area padding for mobile */
+.pb-safe {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
 }
