@@ -2,7 +2,7 @@
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+**URL**: https://safe-steps-map.lovable.app/
 
 <h3>🧭 PathFinder</h3>
 
