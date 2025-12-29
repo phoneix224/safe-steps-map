@@ -3,6 +3,7 @@
 ## Project info
 
 **URL**: https://safe-steps-map.lovable.app/
+**project demo**:https://github.com/AmulyaDsouza-224/safe-steps-map/blob/main/WhatsApp%20Video%202025-12-28%20at%203.19.51%20PM.mp4
 
 <h3>🧭 PathFinder</h3>
 
