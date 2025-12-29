@@ -4,13 +4,13 @@
 
 **URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
 
-🧭 PathFinder
+<h3>🧭 PathFinder</h3>
 
 PathFinder helps you retrace your exact steps when you’re lost in villages or unfamiliar places — something Google Maps doesn’t do.
 
 While maps show destinations, PathFinder remembers where you actually walked.
 
-🌾 Why PathFinder Exists
+<h3>🌾 Why PathFinder Exists</h3>
 
 Google Maps works great in cities.
 In villages and rural areas, it often fails because:
@@ -21,7 +21,7 @@ Paths don’t have names
 
 There’s no way to retrace your own route
 
-PathFinder solves that gap.
+<h3>PathFinder solves that gap.</h3>
 
 🔍 What Makes It Different
 
@@ -35,7 +35,7 @@ PathFinder solves that gap.
 
 Your footsteps become the map.
 
-🎯 Core Idea
+<h3>🎯 Core Idea</h3>
 
 If you can walk it, you can walk back.
-PathFinder makes sure you never lose that path.omain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+PathFinder makes sure you never lose that path
